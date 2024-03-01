@@ -15,15 +15,3 @@ var swiper = new Swiper('.swiper-container', {
     },
     effect: 'fade', // Set the transition effect to "fade"
 });
-//toggle
-document.addEventListener('DOMContentLoaded', function() {
-    // Select the toggle button and the nav-links list
-    const toggleButton = document.querySelector('.navbar-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    // Add an event listener for click events on the toggle button
-    toggleButton.addEventListener('click', function() {
-        // Toggle the 'active' class on the nav-links list
-        navLinks.classList.toggle('active');
-    });
-});

@@ -9,20 +9,18 @@
 <body>
     <div class="container">
         <h1>G2F Connect</h1>
-        <form id="loginForm">
+        <form id="loginForm" method="POST" action="login.php">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
-            <button type="button" onclick="submitLoginForm()">Login</button>
+            <input type="submit" value="Login">
         </form>
 
         <p>Don't have an account? <a href="register.html">Register here</a></p>
         <a href="index.html">Home</a>
     </div>
-
-    <script src="login.js"></script>
 </body>
 </html>

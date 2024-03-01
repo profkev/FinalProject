@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Data</title>
+</head>
+<body>
+    <h1>Farmers Data</h1>
+    <div id="farmersContainer"></div>
+
+    <script>
+        fetch('fetchFarmers.php')
+            .then(response => response.json())
+            .then(data => displayFarmers(data))
+            .catch(error => console.error('Error:', error));
+
+        function displayFarmers(farmers) {
+            const container = document.getElementById('farmersContainer');
+            farmers.forEach(farmer => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <p>Name: ${farmer.name}</p>
+                    <p>Age: ${farmer.age}</p>
+                    <p>Gender: ${farmer.gender}</p>
+                    <p>County: ${farmer.county}</p>
+                    <p>Subcounty: ${farmer.subcounty}</p>
+                    <p>Ward: ${farmer.ward}</p>
+                    <hr>`;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
