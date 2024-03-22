@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Weather Forecast</title>
+    <style>
+        /* CSS for Navbar */
+        .navbar {
+            background-color: #356859; /* Change navbar background color */
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff; /* Change navbar text color */
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: hsl(142, 100%, 35%); /* Change navbar hover background color */
+        }
+
+        /* CSS for Page Content */
+        .weather-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f0f0f0; /* Change page background color */
+            text-align: center;
+            animation: fadeIn 1s ease-in-out; /* Fade in animation */
+        }
+
+        .weather-container h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333; /* Change heading text color */
+        }
+
+        #weather {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #weather-description {
+            margin-top: 20px;
+        }
+
+        /* CSS for Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            color: #333; /* Change table text color */
+        }
+
+        th {
+            background-color: #356859; /* Change table header background color */
+            color: #fff; /* Change table header text color */
+        }
+
+        /* CSS Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index1.php">Home</a>
+        <!-- <a href="#">About</a>
+        <a href="#">Contact</a> -->
+    </div>
+
+    <!-- Page Content -->
+    <div class="weather-container">
+        <h2>Weather Forecast</h2>
+        <div>
+            <label for="city">Enter City:</label>
+            <input type="text" id="cityInput">
+            <button onclick="fetchWeatherData()">Get Weather</button>
+        </div>
+        <div id="weather"></div>
+        <div id="weather-description"></div>
+
+        <!-- Weekly Forecast Table -->
+        <h2>Weekly Forecast</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Temperature (°C)</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Monday</td>
+                <td>25</td>
+                <td>Sunny</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>24</td>
+                <td>Cloudy</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>26</td>
+                <td>Rainy</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>23</td>
+                <td>Partly Cloudy</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>27</td>
+                <td>Sunny</td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td>26</td>
+                <td>Partly Cloudy</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>28</td>
+                <td>Sunny</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchWeatherData();
+        });
+
+        function fetchWeatherData() {
+            const city = document.getElementById('cityInput').value || 'Nairobi';
+            fetch(`weather.php?city=${city}`)
+                .then(response => response.json())
+                .then(data => {
+                    displayWeatherData(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                });
+        }
+
+        function displayWeatherData(data) {
+    // Extract relevant weather information
+    const temperature = Math.round(data.main.temp - 273.15); // Convert temperature from Kelvin to Celsius
+    const weatherDescription = data.weather[0].description;
+    const iconCode = data.weather[0].icon;
+
+    // Update HTML to display weather information with colored icon
+    const weatherDiv = document.getElementById('weather');
+    weatherDiv.innerHTML = `
+        <div class="weather-info">
+            <img src="http://openweathermap.org/img/wn/${iconCode}@2x.png" alt="Weather Icon">
+            <p>Temperature: ${temperature}°C</p>
+            <p>Description: ${weatherDescription}</p>
+        </div>
+    `;
+
+    // Update HTML to display weather description
+    const weatherDescriptionDiv = document.getElementById('weather-description');
+    weatherDescriptionDiv.innerText = `Current weather in ${data.name}: ${weatherDescription}.`;
+}
+
+    </script>
+</body>
+</html>

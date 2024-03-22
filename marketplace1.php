@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, price, description, image_url FROM product";
+$sql = "SELECT name, price, description, image_url FROM products";
 $result = $conn->query($sql);
 ?>
 
@@ -21,17 +21,19 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subsidized Products</title>
+    <title>Marketplace</title>
     <link rel="stylesheet" href="market.css">
     <script src="marketplace.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
-        <h1 class="logo">Subsidized Product</h1>
-       
-        <ul><a href="index1.php">Home</a></ul>
-               
+        <h1 class="logo">Farmer's Marketplace</h1>
+        <ul><a href="./index.html">Home</a></ul>
+                <!-- <ul><a href="sell.html">Sell</a></ul> -->
                 <ul><a href="#contact">Contact</a></ul>
+               
+               
+
         <div class="cart-view">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart cart-icon" viewBox="0 0 16 16">
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>

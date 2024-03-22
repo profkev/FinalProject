@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, start session
             $_SESSION['username'] = $row['username'];
             // Redirect to dashboard
-            header("Location: index1.html");
+            header("Location: index1.php");
             exit();
         } else {
             // Password is incorrect

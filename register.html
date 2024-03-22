@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="register.css">
-    <title>G2F Connect - Farmer Registration</title>
+    <title>Agri connect- Farmer Registration</title>
 </head>
 <body>
     <div class="container">
-        <h1>G2F Connect</h1>
+        <h1>Agri-Connect Register as a farmer</h1>
         <form id="farmerRegistrationForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -25,13 +25,13 @@
             </select>
 
             <label for="county">County:</label>
-            <input type="text" id="county" name="county" required>
-
+            <input type="text" id="county" name="county" required placeholder="Type or select from the list">
+          
             <label for="subcounty">Subcounty:</label>
-            <input type="text" id="subcounty" name="subcounty" required>
-
+            <input type="text" id="subcounty" name="subcounty" required placeholder="Type or select from the list">
+            
             <label for="ward">Ward:</label>
-            <input type="text" id="ward" name="ward" required>
+            <input type="text" id="ward" name="ward" required placeholder="Type or select from the list">
 
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -49,7 +49,29 @@
         <a href="index.html">Home</a>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(document).ready(function(){
+            $('#county').change(function(){
+                var county = $(this).val();
+                if(county){
+                    $.ajax({
+                        type:'POST',
+                        url:'getSubCounties.php',
+                        data:{county: county},
+                        success:function(response){
+                            var data = JSON.parse(response);
+                            $('#subcounty').html(data.subCounties);
+                            $('#ward').html(data.wards);
+                        }
+                    });
+                } else {
+                    $('#subcounty').html('<option value="">Select Subcounty</option>');
+                    $('#ward').html('<option value="">Select Ward</option>');
+                }
+            });
+        });
+
         function validateAndSubmitForm() {
             if (validateRegistrationForm()) {
                 submitForm();
@@ -86,13 +108,18 @@
             xhr.open("POST", "register.php", true);
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    alert(xhr.responseText);
-                    // Optionally, clear the form or redirect the user after successful registration
+                    alert('You have been registered successfully.');
+                    clearForm();
+                    window.location.href = "login.html"; // Redirect to login page
                 } else {
                     alert("Error: " + xhr.status);
                 }
             };
             xhr.send(formData);
+        }
+
+        function clearForm() {
+            document.getElementById("farmerRegistrationForm").reset();
         }
     </script>
 </body>

@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Experts</title>
     <header>
        
         <nav class="nav">
             <div class="logo">
-                <a href="index.html">    <h1>G2F Connect</h1>  </a>
+                <a href="index1.php">    <h1>AgriConnect</h1>  </a>
                 <h1>Welcome to experts corner</h1>
                
             </div>
